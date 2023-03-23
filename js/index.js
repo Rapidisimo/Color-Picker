@@ -8,6 +8,7 @@ const footer = document.querySelector('footer'); //area where hex value is visib
 
 //update colorValue when the color picker is used
 colorPicker.addEventListener('input', (e) => {
+    colorValue = (e.target.value).substring(1);
     colorScheme(colorValue, schemeValue) //run function to update color palette
 })
 
