@@ -1,8 +1,80 @@
+@import url(https://fonts.bunny.net/css?family=aclonica:400|albert-sans:200,300,400);
+
 *{
     box-sizing: border-box;
+    margin: 0;
+    font-family: 'Albert Sans', sans-serif;
 }
 
 body {
-    margin: 0;
-    font-size: 16px;
+    font-size: 16px;}
+
+/* h1, h2, h3, h4 {
+    font-family: 'Aclonica', sans-serif;
+} */
+
+header {
+    margin-top: 2.6rem;
+}
+header h1 {
+    line-height: .8;
+    font-size: 4rem;
+    font-family: 'Aclonica', sans-serif;
+}
+
+.wrapper {
+    width: 640px;
+    margin: 0 auto;
+}
+
+main {
+    max-width: 550px;
+    height: 550px;
+    background-color: #FFFDFE;
+    border: 1px solid gray;
+}
+
+.color-hub {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 1rem;
+    height: 90px;
+    border-bottom: 1px solid gray;
+}
+
+.color-picker {
+    display: grid;
+    justify-items: center;
+    gap: .2rem;
+}
+
+button,
+select {
+    background-color: #FFFDFE;
+    border: 1px solid #D1D5DB;
+    border-radius: 5px;
+    padding: .7rem;
+    font-size: .8rem;
+}
+
+input,
+button,
+select {
+    cursor: pointer;
+}
+
+.color-schemes,
+footer {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.color-schemes {
+    height: 444px;
+}
+
+footer {
+    height: 46px;
 }

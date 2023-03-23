@@ -8,8 +8,48 @@
     <title>Color Picker Solo Project</title>
 </head>
 <body>
-    
-
+    <div class="wrapper">
+        <header>
+            <h1>Color Picker</h1>
+        </header>
+        <main>
+            <div class="color-hub">
+                <div class="color-picker">
+                    <label for="colorWell">Pick Color</label>
+                    <input type="color" value="#ff0000"/>
+                </div>
+                <div>
+                    <select name="schemes" id="schemes">
+                        <option value="NONE" disabled="" selected="" hidden="">Select a Color Scheme</option>
+                        <option value="Monochrome">Monochrome</option>
+                        <option value="Monochrome-Dark">Monochrome-Dark</option>
+                        <option value="Monochrome-Light">Monochrome-Light</option>
+                        <option value="Analogic">Analogic</option>
+                        <option value="Complement">Complement</option>
+                        <option value="Analogic-Complement">Analogic-Complement</option>
+                        <option value="Triad">Triad</option>
+                    </select>
+                </div>
+                <div class="random-color">
+                    <button>Random Color</button>
+                </div>
+            </div>
+            <div class="color-schemes">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+            </div>
+            <footer>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+            </footer>
+        </main>
+    </div>
     <script src="js/index.js"></script>
 </body>
 </html>
