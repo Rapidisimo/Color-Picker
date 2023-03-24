@@ -4,6 +4,7 @@ const selectScheme = document.getElementById('schemes'); //color scheme dropdown
 let schemeValue = selectScheme.value; //color scheme currently selected
 const colorSchemes = document.querySelector('.color-schemes'); //color columns
 const footer = document.querySelector('footer'); //area where hex value is visible
+const randomColorBtn = document.querySelector('.random-color button')
 
 
 //update colorValue when the color picker is used
@@ -16,6 +17,14 @@ colorPicker.addEventListener('input', (e) => {
 selectScheme.addEventListener('input', (e) => {
     schemeValue = e.target.value;
     colorScheme(colorValue, schemeValue) //run function to update color palette
+})
+
+//generate random color
+randomColorBtn.addEventListener('click', () => {
+    const randomValue = Math.floor(Math.random()*16777215).toString(16);
+    colorValue = randomValue;
+    colorPicker.value = `#${randomValue}`
+    colorScheme(colorValue, schemeValue)
 })
 
 //copy color in column
