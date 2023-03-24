@@ -44,6 +44,11 @@ main {
     gap: .2rem;
 }
 
+.color-picker h3 {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
 button,
 select {
     background-color: #FFFDFE;
@@ -70,10 +75,20 @@ footer {
 
 .color-schemes {
     height: 444px;
+    background-color: rgb(234, 222, 206);
 }
 
 .color-column {
     width: 110px;
+    transition: transform 250ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-column h3 {
+    text-shadow: rgb(60, 60, 60) 1px 0 1px;
+    color: white;
 }
 
 footer {
@@ -83,12 +98,62 @@ footer {
 .hex-value {
     border-right: 1px dashed #D1D5DB;
 }
+
 .hex-value:last-child {
     border: none;
 }
 
-footer h3,
-.color-picker h3 {
-    font-size: 1rem;
+.hex-text {
+    font-size: .9rem;
     font-weight: 300;
 }
+
+/* Animations */
+
+.color-column:hover {
+    transform: scale(.97);
+ }
+ .color-column:active {
+    opacity: .8;
+ }
+
+.animate {
+    animation-duration: 0.75s;
+    animation-delay: 0.5s;
+    animation-name: animate-fade;
+    animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+    animation-fill-mode: backwards;
+  }
+
+  @keyframes animate-fade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  .animate.pop {
+    animation-duration: 0.4s;
+    animation-name: animate-pop;
+    animation-timing-function: cubic-bezier(.26, .53, .74, 1.48);
+  }
+  
+  @keyframes animate-pop {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+  
+    100% {
+      opacity: 1;
+      transform: scale(1, 1);
+    }
+  }
+
+.delay-1 { animation-delay: 0.1s; }  
+.delay-2 { animation-delay: 0.2s; }  
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }  
+
+@media screen and (prefers-reduced-motion: reduce) {
+    .animate { animation: none !important; }
+  }

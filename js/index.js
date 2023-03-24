@@ -2,7 +2,7 @@ const colorPicker = document.querySelector('input[type="color"]'); //color input
 let colorValue = (colorPicker.value).substring(1); //color currently selected with # removed
 const selectScheme = document.getElementById('schemes'); //color scheme dropdown element
 let schemeValue = selectScheme.value; //color scheme currently selected
-const colorSchemes = document.querySelector('.color-schemes'); //color columns
+const colorSchemes = document.querySelector('.color-schemes'); //color columns container
 const footer = document.querySelector('footer'); //area where hex value is visible
 const randomColorBtn = document.querySelector('.random-color button')
 
@@ -30,16 +30,15 @@ randomColorBtn.addEventListener('click', () => {
 //copy color in column
 colorSchemes.addEventListener('click', (e) => {
     const clickedColumn = e.target.style["background-color"]
-    const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
+    const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`; //rgb2hex source: https://stackoverflow.com/questions/1740700/how-to-get-hex-color-value-rather-than-rgb-value
     columnColor = rgb2hex(clickedColumn);
-    copyColor(columnColor);
-    //rgb2hex source: https://stackoverflow.com/questions/1740700/how-to-get-hex-color-value-rather-than-rgb-value
+    copyColor(columnColor, e);
 })
 
 //copy color in hex text
 footer.addEventListener('click', (e) => {
     const hexText = (e.target.innerText).toLowerCase();
-    copyColor(hexText);
+    copyColor(hexText, e);
 })
 
 function colorScheme() {
@@ -48,30 +47,50 @@ function colorScheme() {
     .then( data => {
         colorSchemes.innerHTML = ''; //reset color scheme selection
         footer.innerHTML = ''; //reset hex text
+        let counter = 0;
         data.colors.map( function(colorText) {
             //Give me color bars!
             colorSchemes.innerHTML += `
-                <div class="color-column" style="background-color: ${colorText.hex.value}"></div>
+                <div class="color-column animate pop delay-${++counter}" style="background-color: ${colorText.hex.value}"></div>
             `;
             //color bar hex value
             footer.innerHTML += `
-                <div class="hex-value"><h3>${colorText.hex.value}</h3></div>
+                <div class="hex-value"><h3 class="hex-text">${colorText.hex.value}</h3></div>
             `;
         })
     })
 }
 
+function copyStatus(e) {
+    //remove any previous displayed "Copied" h3 and place it on clicked column
+    if(e.target.classList.contains("color-column")) {
+        const colorColumns = document.querySelectorAll('.color-column');
+        for(let i = 0; i < colorColumns.length; ++i) {
+            colorColumns[i].innerHTML = '';
+        }    
+        e.target.innerHTML = `<h3 class="copied">Copied</h3>`;
+    }else if(e.target.classList.contains("hex-text")) {
+        const hexColumns = document.querySelectorAll(".hex-text")
+        for(let i = 0; i < hexColumns.length; ++i) {
+            // console.log(hexColumns[i])
+            if(hexColumns[i].innerText.length > 7) {
+                const hexH3 = hexColumns[i]
+                hexH3.innerText = hexH3.innerText.substring(0, 7)
+            }
+        }
+        e.target.innerHTML += ` ✅`
+    }
+}
+
 //copy color to clipboard
-function copyColor(colorData) {
+function copyColor(colorData, e) {
         navigator.clipboard.writeText(colorData).then(
             () => {
-                console.log(`Copied: ${colorData}`)    
+                copyStatus(e)    
             }, () => {
                 console.log('Copy Failed')
             }
         )
-    
 }
-
 
 colorScheme()
