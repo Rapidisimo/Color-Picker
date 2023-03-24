@@ -61,23 +61,29 @@ function colorScheme() {
     })
 }
 
+function removeCopyMsg() {
+    //color columns
+    const colorColumns = document.querySelectorAll('.color-column');
+    for(let i = 0; i < colorColumns.length; ++i) {
+        colorColumns[i].innerHTML = '';
+    }    
+    //hex columns
+    const hexColumns = document.querySelectorAll(".hex-text")
+    for(let i = 0; i < hexColumns.length; ++i) {
+        if(hexColumns[i].innerText.length > 7) {
+            const hexH3 = hexColumns[i]
+            hexH3.innerText = hexH3.innerText.substring(0, 7)
+        }
+    }
+}
+
 function copyStatus(e) {
     //remove any previous displayed "Copied" h3 and place it on clicked column
     if(e.target.classList.contains("color-column")) {
-        const colorColumns = document.querySelectorAll('.color-column');
-        for(let i = 0; i < colorColumns.length; ++i) {
-            colorColumns[i].innerHTML = '';
-        }    
+        removeCopyMsg()
         e.target.innerHTML = `<h3 class="copied">Copied</h3>`;
     }else if(e.target.classList.contains("hex-text")) {
-        const hexColumns = document.querySelectorAll(".hex-text")
-        for(let i = 0; i < hexColumns.length; ++i) {
-            // console.log(hexColumns[i])
-            if(hexColumns[i].innerText.length > 7) {
-                const hexH3 = hexColumns[i]
-                hexH3.innerText = hexH3.innerText.substring(0, 7)
-            }
-        }
+        removeCopyMsg()
         e.target.innerHTML += ` ✅`
     }
 }
