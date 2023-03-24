@@ -27,7 +27,7 @@ randomColorBtn.addEventListener('click', () => {
     colorScheme(colorValue, schemeValue)
 })
 
-//copy color in column
+//copy color value in column
 colorSchemes.addEventListener('click', (e) => {
     const clickedColumn = e.target.style["background-color"]
     const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`; //rgb2hex source: https://stackoverflow.com/questions/1740700/how-to-get-hex-color-value-rather-than-rgb-value
@@ -35,7 +35,7 @@ colorSchemes.addEventListener('click', (e) => {
     copyColor(columnColor, e);
 })
 
-//copy color in hex text
+//copy hex value from hex column
 footer.addEventListener('click', (e) => {
     const hexText = (e.target.innerText).toLowerCase();
     copyColor(hexText, e);
@@ -62,6 +62,7 @@ function colorScheme() {
 }
 
 function removeCopyMsg() {
+    //removes previous copied message feedback
     //color columns
     const colorColumns = document.querySelectorAll('.color-column');
     for(let i = 0; i < colorColumns.length; ++i) {
@@ -78,7 +79,7 @@ function removeCopyMsg() {
 }
 
 function copyStatus(e) {
-    //remove any previous displayed "Copied" h3 and place it on clicked column
+    //add copied/emoji message to color or hex value clicked
     if(e.target.classList.contains("color-column")) {
         removeCopyMsg()
         e.target.innerHTML = `<h3 class="copied">Copied</h3>`;
@@ -88,7 +89,7 @@ function copyStatus(e) {
     }
 }
 
-//copy color to clipboard
+//copy color value to clipboard
 function copyColor(colorData, e) {
         navigator.clipboard.writeText(colorData).then(
             () => {
