@@ -11,5 +11,11 @@
 ## Stretch Goals
 1. ✅ Click on hex value or color and copy it to the clipboard
 
+## Additions
+1. 🌟 CSS Animations
+2. 🌟 Random Color Button
+3. 🌟 Copy to clipboard feedback in scheme and hex text area
+4. 🌟 Mobile layout
+
 ## Preview
 ![App-Preview](preview.jpg)
